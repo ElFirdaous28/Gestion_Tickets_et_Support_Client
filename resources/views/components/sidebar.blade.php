@@ -12,7 +12,7 @@
 
             @if(auth()->user()->role === 'admin')
             <li>
-                <a href="{{ url('/admin/tickets') }}" class="flex items-center gap-4 py-4 px-4 rounded hover:bg-gray-700">
+                <a href="{{ route('admin.tickets.index') }}" class="flex items-center gap-4 py-4 px-4 rounded hover:bg-gray-700">
                     <ion-icon name="ticket-outline" class="text-xl"></ion-icon><span>Manage Tickets</span>
                 </a>
             </li>
@@ -27,7 +27,7 @@
                 </a>
             </li>
             <li>
-                <a href="{{ url('/admin/categories') }}" class="flex items-center gap-4 py-4 px-4 rounded hover:bg-gray-700">
+                <a href="{{ route('categories.index') }}" class="flex items-center gap-4 py-4 px-4 rounded hover:bg-gray-700">
                     <ion-icon name="albums-outline" class="text-xl"></ion-icon><span>Manage Categories</span>
                 </a>
             </li>
@@ -42,11 +42,6 @@
             <li>
                 <a href="{{ url('/agent/tickets') }}" class="flex items-center gap-4 py-4 px-4 rounded hover:bg-gray-700">
                     <ion-icon name="document-text-outline" class="text-xl"></ion-icon><span>Assigned Tickets</span>
-                </a>
-            </li>
-            <li>
-                <a href="{{ url('/agent/messages') }}" class="flex items-center gap-4 py-4 px-4 rounded hover:bg-gray-700">
-                    <ion-icon name="chatbubble-ellipses-outline" class="text-xl"></ion-icon><span>User Messages</span>
                 </a>
             </li>
             <li>
