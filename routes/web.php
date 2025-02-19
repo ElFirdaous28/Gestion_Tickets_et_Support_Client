@@ -19,7 +19,6 @@ use App\Http\Controllers\TicketController;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/tickets', [TicketController::class, 'index'])->name('ticket');
 
 
 Route::get('/admin/dashboard', function () {
@@ -36,9 +35,10 @@ Route::get('/agent/dashboard', function () {
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
 require __DIR__ . '/auth.php';
+require __DIR__ . '/categories.php';
+require __DIR__ . '/tickets.php';

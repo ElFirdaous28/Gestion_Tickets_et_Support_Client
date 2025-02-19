@@ -37,7 +37,7 @@ class AuthServiceProvider extends ServiceProvider
         return match ($user->role) {
             'admin' => '/admin/dashboard',
             'agent' => '/agent/dashboard',
-            default => '/user/dashboard',
+            default => '/client/dashboard',
         };
     }
 }

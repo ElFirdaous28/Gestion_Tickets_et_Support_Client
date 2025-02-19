@@ -11,6 +11,8 @@ class Ticket extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['title','description','status','user_id','category_id','assigned_to'];
+
     public function user()
     {
         return $this->belongsTo(User::class);
