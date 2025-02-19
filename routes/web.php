@@ -1,9 +1,9 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TicketController;
 
-use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,15 +16,23 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/tickets', [TicketController::class, 'index']);
-
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/tickets', [TicketController::class, 'index'])->name('ticket');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::get('/admin/dashboard', function () {
+    return view('admin.dashboard');
+})->middleware(['auth', 'verified', 'role:admin'])->name('dashboard');
+
+Route::get('/client/dashboard', function () {
+    return view('client.dashboard');
+})->middleware(['auth', 'verified', 'role:client'])->name('dashboard');
+
+Route::get('/agent/dashboard', function () {
+    return view('agent.dashboard');
+})->middleware(['auth', 'verified', 'role:agent'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -33,4 +41,4 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
