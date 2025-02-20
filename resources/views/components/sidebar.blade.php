@@ -1,4 +1,4 @@
-<aside class="w-64 h-screen bg-gray-900 text-white fixed p-4">
+<aside class="w-64 h-screen bg-gray-900 dark:text-white fixed p-4">
     <div class="text-xl font-bold mb-6">
         TicketManager
     </div>
@@ -22,8 +22,8 @@
                 </a>
             </li>
             <li>
-                <a href="{{ url('/admin/users') }}" class="flex items-center gap-4 py-4 px-4 rounded hover:bg-gray-700">
-                    <ion-icon name="people-outline" class="text-xl"></ion-icon><span>Manage Users</span>
+                <a href="{{ url('/admin/clients') }}" class="flex items-center gap-4 py-4 px-4 rounded hover:bg-gray-700">
+                    <ion-icon name="people-outline" class="text-xl"></ion-icon><span>Manage clients</span>
                 </a>
             </li>
             <li>
@@ -40,7 +40,7 @@
 
             @elseif(auth()->user()->role === 'agent')
             <li>
-                <a href="{{ url('/agent/tickets') }}" class="flex items-center gap-4 py-4 px-4 rounded hover:bg-gray-700">
+                <a href="{{ route('agent.tickets.index') }}" class="flex items-center gap-4 py-4 px-4 rounded hover:bg-gray-700">
                     <ion-icon name="document-text-outline" class="text-xl"></ion-icon><span>Assigned Tickets</span>
                 </a>
             </li>
@@ -52,12 +52,12 @@
 
             @else
             <li>
-                <a href="{{ url('/user/tickets/create') }}" class="flex items-center gap-4 py-4 px-4 rounded hover:bg-gray-700">
+                <a href="{{ route('tickets.create') }}" class="flex items-center gap-4 py-4 px-4 rounded hover:bg-gray-700">
                     <ion-icon name="add-circle-outline" class="text-xl"></ion-icon><span>Create a Ticket</span>
                 </a>
             </li>
             <li>
-                <a href="{{ url('/user/tickets') }}" class="flex items-center gap-4 py-4 px-4 rounded hover:bg-gray-700">
+                <a href="{{ url('/client/tickets') }}" class="flex items-center gap-4 py-4 px-4 rounded hover:bg-gray-700">
                     <ion-icon name="document-text-outline" class="text-xl"></ion-icon><span>My Tickets</span>
                 </a>
             </li>
