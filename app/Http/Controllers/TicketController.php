@@ -71,7 +71,10 @@ class TicketController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $ticket = Ticket::findOrFail($id);
+        // $agentName = $ticket->agent ? $ticket->agent->name : 'No agent assigned';
+    
+        return view('tickets.details', compact('ticket'));
     }
 
     /**

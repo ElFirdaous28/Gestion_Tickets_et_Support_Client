@@ -18,7 +18,7 @@ class Ticket extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function assignedUser()
+    public function agent()
     {
         return $this->belongsTo(User::class, 'assigned_to');
     }
@@ -28,7 +28,7 @@ class Ticket extends Model
         return $this->belongsTo(Category::class);
     }
 
-    public function messagess()
+    public function messages()
     {
         return $this->hasMany(TicketMessage::class);
     }
