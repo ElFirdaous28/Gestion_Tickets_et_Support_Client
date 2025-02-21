@@ -23,3 +23,4 @@ Route::middleware(['auth', 'role:client'])->group(function () {
 Route::middleware(['auth', 'role:agent'])->group(function () {
     Route::get('/agent/tickets', [TicketController::class, 'agentAssignedTickets'])->name('agent.tickets.index');
 });
+Route::post('/tickets/{ticket}/status/{newStatus}', [TicketController::class, 'changeStatus'])->name('tickets.changeStatus');
