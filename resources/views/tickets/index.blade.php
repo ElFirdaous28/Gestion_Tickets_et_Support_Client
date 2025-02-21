@@ -14,6 +14,8 @@
                             <thead>
                                 <tr class="bg-gray-700 dark:text-white">
                                     <th class="border border-gray-600 px-4 py-2">Title</th>
+                                    <th class="border border-gray-600 px-4 py-2">Client</th>
+                                    <th class="border border-gray-600 px-4 py-2">Agent</th>
                                     <th class="border border-gray-600 px-4 py-2">Status</th>
                                     <th class="border border-gray-600 px-4 py-2">Category</th>
                                     <th class="border border-gray-600 px-4 py-2">Actions</th>
@@ -23,10 +25,13 @@
                                 @foreach($tickets as $ticket)
                                 <tr class="border border-gray-600">
                                     <td class="border border-gray-600 px-4 py-2">
-                                        <a href="" class="dark:text-white hover:underline">
+                                        <a href="{{ route('ticket.details',$ticket->id) }}" class="dark:text-white hover:underline">
                                             {{ $ticket->title }}
                                         </a>
                                     </td>
+                                    <td class="border border-gray-600 px-4 py-2">{{ $ticket->user->name ?? '----' }}</td>
+                                    <td class="border border-gray-600 px-4 py-2">{{ $ticket->agent->name ?? '----' }}</td>
+
                                     <td class="border-gray-600 px-4 py-2 flex justify-center">
                                         <span class="px-2 rounded-full border-2 min-w-24 text-center {{ $ticket->status === 'pending' ? 'border-red-500 text-red-500' : ($ticket->status === 'in_progress' ? 'border-yellow-500 text-yellow-500' : ($ticket->status === 'resolved' ? 'border-green-500 text-green-500':'border-blue-500 text-blue-500')) }}">
                                             {{ ucfirst(str_replace('_', ' ', $ticket->status)) }}
@@ -68,23 +73,6 @@
                                         </button>
                                         @endif
 
-                                        @if(auth()->user()->role === 'admin' || auth()->user()->role === 'client')
-                                        <form action="{{ route('tickets.changeStatus', ['ticket' => $ticket->id, 'newStatus' => 'closed']) }}" method="POST" onsubmit="return confirm('Are you sure you want to close this ticket?');">
-                                            @csrf
-                                            @method('POST')
-                                            <button type="submit" title="Close Ticket"
-                                                class="{{ $ticket->status === 'closed' ? 'cursor-not-allowed' : '' }}"
-                                                @disabled($ticket->status === 'closed')>
-                                                <ion-icon name="close-circle-outline" class="text-xl text-gray-500"></ion-icon>
-                                            </button>
-                                        </form>
-                                        @endif
-
-                                        @if(auth()->user()->role === 'client' || auth()->user()->role === 'agent')
-                                        <button type="button" title="Send Message">
-                                            <ion-icon name="chatbubble-ellipses-outline" class="text-xl"></ion-icon>
-                                        </button>
-                                        @endif
                                     </td>
                                 </tr>
                                 @endforeach
