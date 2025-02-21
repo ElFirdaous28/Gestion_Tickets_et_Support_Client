@@ -19,7 +19,7 @@ class TicketFactory extends Factory
         return [
             'title' => $this->faker->sentence(4),
             'description' => $this->faker->paragraph(),
-            'status' => $this->faker->randomElement(['pending', 'in_progress', 'resolved']),
+            'status' => $this->faker->randomElement(['pending', 'in_progress', 'resolved', 'closed']),
             'user_id' => User::where('role', 'client')->inRandomOrder()->first()->id ?? User::factory(),
             'category_id' => Category::inRandomOrder()->first()->id ?? Category::factory(),
             'assigned_to' => User::where('role', 'agent')->inRandomOrder()->first()->id ?? null,

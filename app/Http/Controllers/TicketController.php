@@ -21,14 +21,19 @@ class TicketController extends Controller
 
     public function clientTickets()
     {
-        $tickets = Ticket::where('user_id', auth()->id())->get();
+        $tickets = Ticket::where('user_id', auth()->id())
+            ->whereNotIn('status', ['resolved'])
+            ->get();
+
         return view('tickets.index', compact('tickets'));
     }
 
 
     public function agentAssignedTickets()
     {
-        $tickets = Ticket::where('assigned_to', auth()->id())->get();
+        $tickets = Ticket::where('assigned_to', auth()->id())
+            ->whereNotIn('status', ['resolved'])
+            ->get();
         return view('tickets.index', compact('tickets'));
     }
 
@@ -55,8 +60,7 @@ class TicketController extends Controller
             'title' => $request->title,
             'description' => $request->description,
             'category_id' => $request->category_id,
-            'user_id' => auth()->id(), // Assign to logged-in user
-            'status' => 'pending',
+            'user_id' => auth()->id(),
         ]);
 
         return redirect()->route('client.tickets.index')->with('success', 'Ticket created successfully!');
@@ -120,7 +124,16 @@ class TicketController extends Controller
         return redirect()->route('client.tickets.index')->with('success', 'Ticket deleted successfully.');
     }
 
+    public function changeStatus(Ticket $ticket,$newStatus)
+    {
 
+        $ticket->update([
+            'status'=>$newStatus,
+        ]);
+
+
+        return redirect()->back()->with('success', 'Ticket updated successfully!');
+    }
     public function assign(Request $request, $ticketId)
     {
         $request->validate([
