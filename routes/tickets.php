@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TicketController;
+use App\Http\Controllers\TicketMessageController;
 
 Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/admin/tickets', [TicketController::class, 'index'])->name('admin.tickets.index');
@@ -27,3 +28,4 @@ Route::middleware(['auth', 'role:agent'])->group(function () {
 
 // Show Ticket (must be last to avoid conflicts)
 Route::get('/tickets/{ticket}', [TicketController::class, 'show'])->name('ticket.details');
+Route::post('/tickets/{ticket}/messages', [TicketMessageController::class, 'store'])->name('messages.store');
