@@ -15,7 +15,6 @@
                 @endif
 
                 <form action="{{ isset($ticket) ? route('tickets.update', $ticket->id) : route('tickets.store') }}" method="POST">
-                    @csrf
                     @if(isset($ticket))
                         @method('PUT')
                     @endif

@@ -4,14 +4,16 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 use App\Models\TicketMessage;
 
 class Ticket extends Model
 {
     use HasFactory;
+    use SoftDeletes;
 
-    protected $fillable = ['title', 'description', 'status', 'user_id', 'category_id', 'assigned_to'];
+    protected $fillable = ['title', 'description', 'status', 'user_id', 'category_id', 'assigned_to','deleted_at'];
 
     public function user()
     {

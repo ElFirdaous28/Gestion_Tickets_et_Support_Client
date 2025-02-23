@@ -10,6 +10,11 @@
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="p-6 text-gray-900 dark:text-gray-100">
+                        @if(session('success'))
+                        <div class=" text-green-500 p-3 rounded mb-4">
+                            {{ session('success') }}
+                        </div>
+                        @endif
                         <table class="w-full border-collapse border border-gray-700">
                             <thead>
                                 <tr class="bg-gray-700 dark:text-white">
@@ -56,7 +61,7 @@
                                             <ion-icon name="create-outline" class="text-xl text-yellow-500"></ion-icon>
                                         </a>
 
-                                        <form action="{{ route('ticket.destroy', $ticket->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this ticket?');">
+                                        <form action="{{ route('tickets.destroy', $ticket->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this ticket?');">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" title="Delete Ticket">
@@ -100,8 +105,8 @@
                         </select>
                     </div>
                     <div class="flex justify-between mt-6">
-                        <button type="button" @click="open = false" class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600">Cancel</button>
-                        <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Assign Ticket</button>
+                        <button type="button" @click="open = false" class="bg-gray-500 dark:text-white px-4 py-2 rounded hover:bg-gray-600">Cancel</button>
+                        <button type="submit" class="bg-blue-500 dark:text-white px-4 py-2 rounded hover:bg-blue-600">Assign Ticket</button>
                     </div>
                 </form>
             </div>

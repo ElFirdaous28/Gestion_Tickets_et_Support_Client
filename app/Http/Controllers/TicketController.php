@@ -73,7 +73,7 @@ class TicketController extends Controller
     {
         $ticket = Ticket::findOrFail($id);
         // $agentName = $ticket->agent ? $ticket->agent->name : 'No agent assigned';
-    
+
         return view('tickets.details', compact('ticket'));
     }
 
@@ -114,24 +114,31 @@ class TicketController extends Controller
         ]);
 
 
-        return redirect()->route('client.tickets.index')->with('success', 'Ticket updated successfully!');
+        return redirect()->route('tickets.edit',$ticket->id)->with('success', 'Ticket updated successfully!');
     }
-
     /**
      * Remove the specified resource from storage.
      */
 
     public function destroy(Ticket $ticket)
     {
-        $ticket->delete();
+        $ticket->forceDelete();
         return redirect()->route('client.tickets.index')->with('success', 'Ticket deleted successfully.');
     }
 
-    public function changeStatus(Ticket $ticket,$newStatus)
+    public function close(Ticket $ticket)
+    {
+        $ticket->update(['status' => 'closed']);
+        $ticket->delete();
+        $role = auth()->user()->role;
+        return redirect()->route("$role.tickets.index")->with('success', 'Ticket closed successfully.');
+    }
+
+    public function changeStatus(Ticket $ticket, $newStatus)
     {
 
         $ticket->update([
-            'status'=>$newStatus,
+            'status' => $newStatus,
         ]);
 
 

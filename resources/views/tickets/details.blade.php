@@ -51,7 +51,7 @@
                     @endif
 
                     @if($ticket->status !== 'closed' && (auth()->user()->role === 'admin' || auth()->user()->role === 'client'))
-                    <form action="{{ route('tickets.changeStatus', ['ticket' => $ticket->id, 'newStatus' => 'closed']) }}" method="POST"
+                    <form action="{{ route('tickets.close', $ticket->id) }}" method="POST"
                         onsubmit="return confirm('Are you sure you want to close this ticket?');">
                         @csrf
                         @method('POST')
