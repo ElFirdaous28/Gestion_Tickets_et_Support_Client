@@ -23,15 +23,15 @@ Route::get('/', function () {
 
 Route::get('/admin/dashboard', function () {
     return view('admin.dashboard');
-})->middleware(['auth', 'verified', 'role:admin'])->name('dashboard');
+})->middleware(['auth', 'verified', 'role:admin'])->name('admin.dashboard');
 
 Route::get('/client/dashboard', function () {
     return view('client.dashboard');
-})->middleware(['auth', 'verified', 'role:client'])->name('dashboard');
+})->middleware(['auth', 'verified', 'role:client'])->name('client.dashboard');
 
 Route::get('/agent/dashboard', function () {
     return view('agent.dashboard');
-})->middleware(['auth', 'verified', 'role:agent'])->name('dashboard');
+})->middleware(['auth', 'verified', 'role:agent'])->name('agent.dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
