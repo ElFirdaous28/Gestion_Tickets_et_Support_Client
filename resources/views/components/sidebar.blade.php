@@ -5,7 +5,7 @@
     <nav>
         <ul>
             <li>
-                <a href="{{ url('/dashboard') }}" class="flex items-center gap-4 py-4 px-4 rounded hover:bg-gray-700">
+                <a href="{{ route('admin.dashboard') }}" class="flex items-center gap-4 py-4 px-4 rounded hover:bg-gray-700">
                     <ion-icon name="home-outline" class="text-xl"></ion-icon><span>Dashboard</span>
                 </a>
             </li>
